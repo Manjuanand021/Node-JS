@@ -1,6 +1,6 @@
 let fName = 'Toladinni';
-(function() {
+(function(lName) {
     let fName = 'Manjuanand';
-    console.log(fName);
-}())
+    console.log(`${fName} ${lName}`);
+}('Toladinni'))
 console.log(fName);
