@@ -11,15 +11,37 @@
 
 var figlet = require('figlet');
 
-figlet.text('Lets get you onboard', {
-    font: 'colossal',
-    horizontalLayout: 'controlled smushing',
-    verticalLayout: 'controlled smushing'
-}, function(err, data) {
+figlet('Hello World!', 'Standard', function(err, data) {
     if (err) {
         console.log('Something went wrong...');
         console.dir(err);
         return;
     }
+
     console.log(data);
+
+    figlet.text('Again, Hello World!', 'Graffiti', function(err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+
+        console.log(data);
+
+        figlet.text('Last time...', {
+            font: 'Standard',
+            horizontalLayout: 'full',
+            verticalLayout: 'full'
+        }, function(err, data) {
+            if (err) {
+                console.log('Something went wrong...');
+                console.dir(err);
+                return;
+            }
+            console.log(data);
+        });
+
+    });
+
 });
