@@ -11,7 +11,8 @@ const express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     flash = require('connect-flash'),
-    config = require('./config'),
+    config = require('./config/config'),
+    passportConfig = require('./config/passport'),
     routes = require('./routes/route.js'),
     port = process.env.PORT || 3000,
     app = express();
@@ -35,19 +36,23 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+//**********************
+// passport for configuration
+//**********************
+passportConfig(passport);
 //Need these for passport setup
-// app.use(session({
-//     secret: config.sessionSecret //Session secret
-// }));
-// app.use(passport.initialize()); //initialize passport
-// app.use(passport.session()); //for persistant login session
-// app.use(flash()); //Use connect-flash for flash messages stored in session
+app.use(session({
+    secret: config.sessionSecret //Session secret
+}));
+app.use(passport.initialize()); //initialize passport
+app.use(passport.session()); //for persistant login session
+app.use(flash()); //Use connect-flash for flash messages stored in session
 
 //**********************
 //routes
 //**********************
-// routes(app, passport); //add other routes
-routes(app); //add other routes
+routes(app, passport); //add other routes
+// routes(app); //add other routes
 
 //**********************
 //Kick start the app
