@@ -45,7 +45,7 @@ app.use(session({
     secret: config.sessionSecret //Session secret
 }));
 app.use(passport.initialize()); //initialize passport
-app.use(passport.session()); //for persistant login session
+app.use(passport.session()); //for persistent login session
 app.use(flash()); //Use connect-flash for flash messages stored in session
 
 //**********************
