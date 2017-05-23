@@ -43,11 +43,6 @@ module.exports = (app, passport) => {
     }));
 
     //##########################
-    // process the signup form
-    // app.post('/signup', do all our passport stuff here);
-    //##########################
-
-    //##########################
     //Profile page
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -67,6 +62,23 @@ module.exports = (app, passport) => {
         req.logout();
         res.redirect('/');
     });
+
+    // =====================================
+    // GOOGLE ROUTES =======================
+    // =====================================
+    // send to google to do the authentication
+    // profile gets us their basic information including their name
+    // email gets their emails
+    app.get('/auth/google', passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/profile',
+            failureRedirect: '/'
+        }));
 };
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

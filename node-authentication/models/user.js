@@ -12,19 +12,19 @@ const userSchema = mongoose.Schema({
         id: String,
         token: String,
         email: String,
-        password: String
+        name: String
     },
     twitter: {
         id: String,
         token: String,
         email: String,
-        password: String
+        name: String
     },
     google: {
         id: String,
         token: String,
         email: String,
-        password: String
+        name: String
     }
 });
 
